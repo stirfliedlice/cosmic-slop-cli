@@ -1,1 +1,1 @@
-::: cosmic_slop_cli.foo
+::: cosmic_slop_cli.__main__
