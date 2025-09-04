@@ -1,0 +1,102 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python Debugger: Module",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": "${command:pickArgs}"
+    },
+    {
+      "name": "My Agent Details",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "agents",
+        "my",
+        "details"
+      ]
+    },
+    {
+      "name": "My Agent Details JSON",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "agents",
+        "my",
+        "details",
+        "--json"
+      ]
+    },
+    {
+      "name": "My Agent Events",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "agents",
+        "my",
+        "events"
+      ]
+    },
+    {
+      "name": "Public Agent Details",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "agents",
+        "public",
+        "details",
+        "SAGGY-QUAIL"
+      ]
+    },
+    {
+      "name": "List All Agents",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "agents",
+        "public",
+        "all"
+      ]
+    },
+    {
+      "name": "My Contract Details",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "contracts",
+        "details",
+        "cmezvhel8rfmbri74vflbioav"
+      ]
+    },
+    {
+      "name": "My Contract Details JSON",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "contracts",
+        "details",
+        "cmezvhel8rfmbri74vflbioav",
+        "--json"
+      ]
+    },
+    {
+      "name": "List My Contracts",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "contracts",
+        "list"
+      ]
+    }
+  ]
+}

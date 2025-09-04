@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
-
 import json
 from pathlib import Path
+
+import typer
+
+from cosmic_slop_cli.console import console
 
 
 def read_agent_token() -> dict[str, str | int]:
@@ -14,8 +17,8 @@ def read_agent_token() -> dict[str, str | int]:
             agent_info = json.load(file)
             return agent_info
     except FileNotFoundError:
-        print(f"Error: The file {file_path} was not found.")
-        return agent_info
+        console.print(f"Error: The file {file_path} was not found.")
+        raise typer.Exit(code=1) from None
     except Exception as e:
-        print(f"An error occurred: {e}")
-        return agent_info
+        console.print(f"An error occurred: {e}")
+        raise typer.Exit(code=1) from None

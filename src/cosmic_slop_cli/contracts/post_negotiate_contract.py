@@ -7,6 +7,6 @@ from cosmic_slop_cli.console import console
 app = typer.Typer()
 
 
-@app.command()
+@app.command(name="negotiate", help="Negotiate a contract")
 def post_negotiate_contract() -> None:
     console.print("post_negotiate_contract called")
