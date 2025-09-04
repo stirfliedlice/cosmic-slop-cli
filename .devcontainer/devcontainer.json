@@ -3,12 +3,15 @@
 {
     "name": "cosmic-slop-cli",
     // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
-    "runArgs": [
-        // avoid UID/GID remapping under rootless Podman
-        "--userns=keep-id"
-      ],
-    "features": {},
+    "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye",
+
+    // "runArgs": [
+    //     // avoid UID/GID remapping under rootless Podman
+    //     "--userns=keep-id"
+    //   ],
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
 
     // Use 'postCreateCommand' to run commands after the container is created.
     "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
@@ -24,6 +27,12 @@
                 "python.defaultInterpreterPath": "/workspaces/cosmic-slop-cli/.venv/bin/python",
                 "python.testing.pytestPath": "/workspaces/cosmic-slop-cli/.venv/bin/pytest"
             }
+        },
+        "jetbrains" : {
+          "backend" : "PyCharm"
         }
     }
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
 }
