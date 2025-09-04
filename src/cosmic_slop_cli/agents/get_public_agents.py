@@ -4,6 +4,7 @@ from typing import Annotated
 
 import requests
 import typer
+from requests.exceptions import HTTPError
 from rich.json import JSON
 from rich.panel import Panel
 from rich.table import Table
@@ -26,7 +27,7 @@ def get_public_agent_details(
         response = requests.get(url, timeout=10)
         response.raise_for_status()
         api_data = response.json()["data"]
-    except requests.exceptions.RequestException as e:
+    except HTTPError as e:
         console.print(f"Request failed: {e}")
         if response.json():
             console.print(Panel.fit(JSON.from_data(response.json()), title="Response JSON"))
@@ -63,7 +64,7 @@ def get_all_public_agents(json: Annotated[bool, typer.Option(help="Output detail
             total_agents = response.json()["meta"]["total"]
             agent_list.extend(api_data)
             page += 1
-        except requests.exceptions.RequestException as e:
+        except HTTPError as e:
             console.print(f"Request failed: {e}")
             if response.json():
                 console.print(Panel.fit(JSON.from_data(response.json()), title="Response JSON"))

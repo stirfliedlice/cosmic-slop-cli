@@ -4,6 +4,7 @@ from typing import Annotated
 
 import requests
 import typer
+from requests.exceptions import HTTPError
 from rich.json import JSON
 from rich.panel import Panel
 from rich.table import Table
@@ -27,7 +28,7 @@ def get_my_agent_details(json: Annotated[bool, typer.Option(help="Output details
         response = requests.get(url, headers=headers, timeout=30)
         response.raise_for_status()
         api_data = response.json()["data"]
-    except requests.exceptions.RequestException as e:
+    except HTTPError as e:
         console.print(f"Request failed: {e}")
         if response.json():
             console.print(Panel.fit(JSON.from_data(response.json()), title="Response JSON"))
@@ -58,7 +59,7 @@ def get_my_agent_events() -> None:
         response = requests.get(url, headers=headers, timeout=30)
         response.raise_for_status()
         api_data = response.json()["data"]
-    except requests.exceptions.RequestException as e:
+    except HTTPError as e:
         console.print(f"Request failed: {e}")
         if response.json():
             console.print(Panel.fit(JSON.from_data(response.json()), title="Response JSON"))

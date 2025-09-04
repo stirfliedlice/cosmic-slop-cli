@@ -17,6 +17,11 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+dependencies = [
+    "requests>=2.32.5",
+    "rich>=14.1.0",
+    "typer>=0.17.3",
+]
 
 [project.urls]
 Homepage = "https://stirfliedlice.github.io/cosmic-slop-cli/"

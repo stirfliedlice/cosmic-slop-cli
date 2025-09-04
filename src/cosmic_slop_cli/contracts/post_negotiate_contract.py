@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 
 import typer
-from rich import rprint
+
+from cosmic_slop_cli.console import console
 
 app = typer.Typer()
 
 
 @app.command()
 def post_negotiate_contract() -> None:
-    rprint("post_negotiate_contract called")
+    console.print("post_negotiate_contract called")
