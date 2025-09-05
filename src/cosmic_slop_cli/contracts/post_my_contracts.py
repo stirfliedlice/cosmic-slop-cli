@@ -12,8 +12,6 @@ from cosmic_slop_cli.send_request import send_post_request
 
 app: typer.Typer = typer.Typer(no_args_is_help=True)
 
-api_data: dict[str, Any] = {}
-
 
 @app.command(name="accept", help="Accept a contract")
 def post_accept_contracts(
@@ -22,6 +20,7 @@ def post_accept_contracts(
 ) -> None:
     console.print("post_accept_contracts called")
     url: str = "https://api.spacetraders.io/v2/my/contracts/" + contract_id + "/accept"
+    api_data: dict[str, Any] = {}
     api_data = send_post_request(url)
     if json:
         console.print(Panel.fit(JSON.from_data(api_data), title="Contract Details"))
@@ -47,6 +46,7 @@ def post_deliver_contract_cargo(
         "tradeSymbol": trade_symbol,
         "units": units,
     }
+    api_data: dict[str, Any] = {}
     api_data = send_post_request(url, data)
     if json:
         console.print(Panel.fit(JSON.from_data(api_data), title="Contract Details"))
@@ -64,6 +64,7 @@ def post_fulfill_contracts(
 ) -> None:
     console.print("post_fulfill_contracts called with contract_id:", contract_id)
     url: str = "https://api.spacetraders.io/v2/my/contracts/" + contract_id + "/fulfill"
+    api_data: dict[str, Any] = {}
     api_data = send_post_request(url)
     if json:
         console.print(Panel.fit(JSON.from_data(api_data), title="Contract Details"))

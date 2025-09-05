@@ -22,3 +22,19 @@ def read_agent_token() -> dict[str, str | int]:
     except Exception as e:
         console.print(f"An error occurred: {e}")
         raise typer.Exit(code=1) from None
+
+
+def read_account_token() -> str:
+    """does different stuff"""
+    file_path: Path = Path.cwd() / "account_api_key.txt"
+    account_token: str = ""
+    try:
+        with open(file_path, encoding="utf-8") as file:
+            account_token = file.read().strip()
+            return account_token
+    except FileNotFoundError:
+        console.print(f"Error: The file {file_path} was not found.")
+        raise typer.Exit(code=1) from None
+    except Exception as e:
+        console.print(f"An error occurred: {e}")
+        raise typer.Exit(code=1) from None

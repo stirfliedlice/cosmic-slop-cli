@@ -10,5 +10,4 @@ def test_version():
     with runner.isolated_filesystem():
         result = runner.invoke(app, ["--version"])
         assert result.exit_code == 0
-        # assert result.output.startswith("cosmic_slop_cli, version ")
         assert result.output.strip() == (f"cosmic_slop_cli, version {__version__}")
