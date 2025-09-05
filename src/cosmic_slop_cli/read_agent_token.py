@@ -10,7 +10,7 @@ from cosmic_slop_cli.console import console
 
 def read_agent_token() -> dict[str, str | int]:
     """does stuff"""
-    file_path: Path = Path.cwd() / "agent_info.json"
+    file_path: Path = Path.cwd() / "temp" / "agent_info.json"
     agent_info: dict[str, str | int] = {}
     try:
         with open(file_path, encoding="utf-8") as file:
@@ -26,7 +26,7 @@ def read_agent_token() -> dict[str, str | int]:
 
 def read_account_token() -> str:
     """does different stuff"""
-    file_path: Path = Path.cwd() / "account_api_key.txt"
+    file_path: Path = Path.cwd() / "temp" / "account_api_key.txt"
     account_token: str = ""
     try:
         with open(file_path, encoding="utf-8") as file:

@@ -185,6 +185,15 @@
         "COSMIC",
         "--json"
       ]
+    },
+    {
+      "name": "Mining Drone",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "mining-drone"
+      ]
     }
   ]
 }
