@@ -36,20 +36,25 @@ def get_public_agent_details(
 @app.command(name="all")
 def get_all_public_agents(json: Annotated[bool, typer.Option(help="Output details in JSON format")] = False) -> None:
     """Fetch and display a list of all public agents."""
-    url: str = "https://api.spacetraders.io/v2/agents"
-    total_agents: int = 100  # Placeholder for total agents
-    page: int = 1
-    agent_list: list[dict[str, str | int]] = []
+    api_url: str = "https://api.spacetraders.io/v2/agents"
     api_data: dict[str, Any] = {}
-    while len(agent_list) < total_agents:
-        url = f"https://api.spacetraders.io/v2/agents?page={page}&limit=20"
-        api_data = send_get_request(url)
-        total_agents = api_data["meta"]["total"]
-        agent_list.extend(api_data["data"])
-        page += 1
+    api_data = send_get_request(api_url + "?page=1&limit=20")
+    agent_list: list[dict[str, str | int]] = []
+    agent_list.extend(api_data["data"])
     if json:
-        console.print(Panel.fit(JSON.from_data(agent_list), title="Agent Details"))
-    else:
+        console.print(Panel.fit(JSON.from_data(api_data), title=f"Agent Details Page {api_data['meta']['page']}"))
+
+    if api_data["meta"]["total"] > api_data["meta"]["limit"]:
+        while len(agent_list) < api_data["meta"]["total"]:
+            url = f"{api_url}?page={api_data['meta']['page'] + 1}&limit=20"
+            api_data = send_get_request(url)
+            if json:
+                console.print(
+                    Panel.fit(JSON.from_data(api_data), title=f"Agent Details Page {api_data['meta']['page']}")
+                )
+            agent_list.extend(api_data["data"])
+
+    if not json:
         table = Table(title="Agent Summary")
         table.add_column("symbol")
         table.add_column("headquarters", justify="center")
@@ -65,4 +70,4 @@ def get_all_public_agents(json: Annotated[bool, typer.Option(help="Output detail
                 str(item.get("shipCount", "")),
             )
         console.print(table)
-        console.print(f"Total Agents: {total_agents}")
+        console.print(f"Total Agents: {api_data['meta']['total']}")

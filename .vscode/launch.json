@@ -66,6 +66,18 @@
       ]
     },
     {
+      "name": "List All Agents JSON",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "agents",
+        "public",
+        "all",
+        "--json"
+      ]
+    },
+    {
       "name": "My Contract Details",
       "type": "debugpy",
       "request": "launch",
@@ -96,6 +108,82 @@
       "args": [
         "contracts",
         "list"
+      ]
+    },
+    {
+      "name": "List My Contracts JSON",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "contracts",
+        "list",
+        "--json"
+      ]
+    },
+    {
+      "name": "Get My Factions",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "factions",
+        "my"
+      ]
+    },
+    {
+      "name": "Get My Factions JSON",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "factions",
+        "my",
+        "--json"
+      ]
+    },
+    {
+      "name": "List All Factions",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "factions",
+        "list"
+      ]
+    },
+    {
+      "name": "List All Factions JSON",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "factions",
+        "list",
+        "--json"
+      ]
+    },
+    {
+      "name": "Get Faction Details",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "factions",
+        "details",
+        "COSMIC"
+      ]
+    },
+    {
+      "name": "Get Faction Details JSON",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "cosmic_slop_cli",
+      "args": [
+        "factions",
+        "details",
+        "COSMIC",
+        "--json"
       ]
     }
   ]
