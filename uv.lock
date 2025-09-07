@@ -184,7 +184,6 @@ name = "cosmic-slop-cli"
 version = "0.0.1"
 source = { editable = "." }
 dependencies = [
-    { name = "requests" },
     { name = "rich" },
     { name = "typer" },
 ]
@@ -205,7 +204,6 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "requests", specifier = ">=2.32.5" },
     { name = "rich", specifier = ">=14.1.0" },
     { name = "typer", specifier = ">=0.17.3" },
 ]
