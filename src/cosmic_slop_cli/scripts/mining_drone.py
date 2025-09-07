@@ -10,7 +10,7 @@ from rich import print as rprint
 from rich.table import Table
 
 from cosmic_slop_cli.console import console
-from cosmic_slop_cli.send_request import send_get_request
+from cosmic_slop_cli.send_request import send_get_request, send_post_request
 
 app: typer.Typer = typer.Typer(no_args_is_help=True)
 
@@ -110,10 +110,7 @@ def market_good_table(marketplace_list, market_goods):
         print(f"An error occurred while reading the file: {e}")
 
 
-@app.command(name="mining-drone")
-def mining_drone_loop() -> None:
-    """Fetch and display details of ."""
-
+def market_data_script():
     out_file_path: Path = Path.cwd() / "temp" / "marketplace.txt"
     if not os.path.exists(out_file_path):
         marketplace_list = find_marketplace()
@@ -145,5 +142,30 @@ def mining_drone_loop() -> None:
     out_file_path: Path = Path.cwd() / "temp" / "market_goods_table.txt"
     if not os.path.exists(out_file_path):
         market_good_table(marketplace_list, market_goods)
+
+
+@app.command(name="mining-drone")
+def mining_drone_loop() -> None:
+    """Fetch and display details of ."""
+
+    market_data_script()
+
+    url = "https://api.spacetraders.io/v2/my/ships/QUAIL-CORSET-3/nav"
+    api_data = send_get_request(url)
+    if api_data["data"]["status"] == "IN_TRANSIT":
+        pass
+    elif api_data["data"]["status"] == "IN_ORBIT":
+        console.print("Ship is in orbit, need to dock")
+        url = "https://api.spacetraders.io/v2/my/ships/QUAIL-CORSET-3/dock"
+        api_data = send_get_request(url)
+        console.print(api_data)
+    elif api_data["data"]["status"] == "DOCKED":
+        console.print("Ship is docked, can perform actions")
+        url = "https://api.spacetraders.io/v2/my/ships/QUAIL-CORSET-3/warp"
+        payload = {"waypointSymbol": "X1-C30-43-4A"}
+        api_data = send_post_request(url, payload)
+        console.print(api_data)
+    else:
+        console.print(f"Ship status is {api_data['data']['status']}")
 
     raise typer.Exit()
